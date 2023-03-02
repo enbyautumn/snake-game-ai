@@ -1,0 +1,36 @@
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script defer src="main.js" type="module"></script>
+<div id="container"></div>
+<canvas id="canvas"></canvas>
+
+<style>
+    body {
+        margin: 0;
+        background-color: whitesmoke;
+    }
+
+    #container {
+        width: calc(100vmin - 2em);
+        height: calc(100vmin - 2em);
+        margin: 1em;
+        display: grid;
+        gap: 1em;
+        grid-template-columns: repeat(8, 1fr);
+        grid-template-rows: auto;
+    }
+
+    canvas {
+        background-color: white;
+        width: 100%;
+        aspect-ratio: 1;
+    }
+
+    #canvas {
+        width: unset;
+        aspect-ratio: unset;
+        margin: 1em;
+    }
+</style>
+
+
+<script>(function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='//mrdoob.github.io/stats.js/build/stats.min.js';document.head.appendChild(script);})()</script>
