@@ -3,6 +3,9 @@ import {Scene} from './scene.js';
 import {Brain} from './brain.js';
 import { LocalStorage } from "node-localstorage";
 global.localStorage = new LocalStorage('./localstorage');
+import * as fs from 'fs';
+const stream = fs.createWriteStream("log.csv", {flags:'a'});
+stream.write("Generation, Best Reward, Average Reward\n");
 
 Math.sigmoid = (x) => 1 / (1 + Math.exp(-x))
 
@@ -153,6 +156,7 @@ for (let i = startGen; i < generations; i++) {
     let averageReward = rewards.reduce((sum, reward) => sum + reward, 0) / rewards.length;
 
     console.log('Best reward:', best.reward, ' Brain #: ', best.index, ' Average reward: ', averageReward);
+    stream.write(`${i},${best.reward},${averageReward}\n`);
 
     // chart.data.labels.push(i);
     // chart.data.datasets[0].data.push(best.reward);

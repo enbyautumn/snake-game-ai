@@ -137,7 +137,16 @@ let topN = 8;
 let mutateAmt = .1;
 let shouldLoad = prompt('Load brain?') == 'y';
 let startGen = 0;
+let loadFromFile = false;
 
+if (loadFromFile) {
+    let url = './brain'
+    await fetch(url).then((response) => {
+        return response.text();
+    }).then((json) => {
+        localStorage.setItem('brain', json);
+    })
+}
 if (shouldLoad && localStorage.getItem('brain')) {
     startGen = loadGeneration();
     for (let i = 0; i < brains.length; i++) {
