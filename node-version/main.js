@@ -115,7 +115,7 @@ function loadGeneration() {
 
 let generations = 100000;
 let topN = 8;
-let mutateAmt = .1;
+let mutateAmt = .05;
 let shouldLoad = true;
 let startGen = 0;
 
