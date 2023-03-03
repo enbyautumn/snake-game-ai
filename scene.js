@@ -23,7 +23,7 @@ export class Scene {
         this.canvas.height = size;
         this.size = size;
 
-        this.maxSteps = 10000;
+        this.maxSteps = 20000;
         this.steps = 0;
 
         this.reward = 0;
@@ -147,8 +147,11 @@ class Goal {
     }
 
     respawn() {
-        this.x = this.random() * this.sceneSize;
-        this.y = this.random() * this.sceneSize;
+        // this.x = this.random() * this.sceneSize;
+        // this.y = this.random() * this.sceneSize;
+        let margin = 10;
+        this.x = mapRange(this.random(), 0, 1, margin, this.sceneSize - margin);
+        this.y = mapRange(this.random(), 0, 1, margin, this.sceneSize - margin);
     }
 
     resetSeed(seed) {

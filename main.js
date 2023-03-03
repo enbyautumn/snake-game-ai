@@ -137,7 +137,7 @@ let topN = 8;
 let mutateAmt = .1;
 let shouldLoad = prompt('Load brain?') == 'y';
 let startGen = 0;
-let loadFromFile = false;
+let loadFromFile = true;
 
 if (loadFromFile) {
     let url = './brain'
