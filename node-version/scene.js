@@ -1,3 +1,5 @@
+import {prng_alea} from './esm-seedrandom.js';
+
 function rectangleSdf(x, y, rx, ry, rw, rh) {
     let dx = Math.max(Math.abs(x - rx) - (rw/2), 0);
     let dy = Math.max(Math.abs(y - ry) - (rh/2), 0);
@@ -29,7 +31,7 @@ export class Scene {
         this.stepsSinceFood = 0;
         this.stepsSinceFoodUntilPunishment = 100;
 
-        this.snake = new Snake(this.size / 2, this.size / 2, Math.random() * Math.PI * 2, 5, 70, this.size, this);
+        this.snake = new Snake(this.size / 2, this.size / 2, 0 * Math.PI * 2, 5, 70, this.size, this);
         this.goal = new Goal(100, 100, 10, this.size);
 
         this.onInit();
@@ -38,7 +40,7 @@ export class Scene {
     onInit() {
         // let container = document.getElementById('container');
         // container.appendChild(this.canvas);
-        this.goal.respawn();
+        // this.goal.respawn();
     }
 
     destroy() {
@@ -114,8 +116,9 @@ export class Scene {
         // debugger
     }
 
-    reset() {
-        this.snake = new Snake(this.size / 2, this.size / 2, Math.random() * Math.PI * 2, 5, 70, this.size, this);
+    reset(seed) {
+        this.goal.resetSeed(seed);
+        this.snake = new Snake(this.size / 2, this.size / 2, 0 * Math.PI * 2, 5, 70, this.size, this);
         this.goal.respawn();
         this.steps = 0;
         this.reward = 0;
@@ -128,6 +131,8 @@ class Goal {
         this.y = y;
         this.radius = radius;
         this.sceneSize = sceneSize;
+
+        this.random = null;
     }
 
     draw(context) {
@@ -144,8 +149,12 @@ class Goal {
     }
 
     respawn() {
-        this.x = Math.random() * this.sceneSize;
-        this.y = Math.random() * this.sceneSize;
+        this.x = this.random() * this.sceneSize;
+        this.y = this.random() * this.sceneSize;
+    }
+
+    resetSeed(seed) {
+        this.random = prng_alea(seed);
     }
 }
 

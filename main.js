@@ -36,6 +36,11 @@ for (let i = 0; i < sceneCount; i++) {
     brains.push(new Brain([19, 25, 30, 40, 30, 20, 15, 8, 3]));
 }
 
+let seed = Math.random().toString();
+scenes.forEach((scene) => {
+    scene.reset(seed);
+})
+
 let stepBatchSize = 0;
 let stepBatchStepSize = 100;
 let maxStepBatchSize = 1000;
@@ -185,7 +190,8 @@ for (let i = startGen; i < generations; i++) {
         return brain;
     })
 
+    let seed = Math.random().toString();
     scenes.forEach((scene) => {
-        scene.reset();
+        scene.reset(seed);
     })
 }
